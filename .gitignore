@@ -2,3 +2,10 @@
 __pycache__
 train
 train_data
+*.pth
+/.vscode
+test
+**/*.pth
+
+train_resized
+*events*

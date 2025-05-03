@@ -1,0 +1,9 @@
+{
+    "Andesite": 0,
+    "Basalt": 1,
+    "Etc": 2,
+    "Gneiss": 3,
+    "Granite": 4,
+    "Mud_Sandstone": 5,
+    "Weathered_Rock": 6
+}

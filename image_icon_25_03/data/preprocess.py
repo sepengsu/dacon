@@ -1,7 +1,5 @@
-import os
-import cv2
+import os, cv2, random, numpy as np
 import albumentations as A
-import numpy as np
 from collections import Counter
 
 # 원본 이미지 경로 & 저장할 증강 이미지 경로
@@ -18,7 +16,11 @@ labels = list(range(10))  # [0,1,2,3,4,5,6,7,8,9]
 file_counts = {label: len([f for f in os.listdir(data_path) if f"_{label}.png" in f]) for label in labels} 
 
 # 가장 많은 클래스 개수 찾기
-max_count = max(file_counts.values())
+max_count = max(file_counts.values())*20  # 가장 많은 클래스 개수의 20배
+
+# 시드 고정
+np.random.seed(42)
+random.seed(42)
 
 # Albumentations 기반 이미지 증강 파이프라인
 augmentations = A.Compose([
@@ -27,7 +29,7 @@ augmentations = A.Compose([
     A.RandomBrightnessContrast(p=0.5),
     A.GaussianBlur(p=0.2),
     A.ShiftScaleRotate(shift_limit=0.05, scale_limit=0.05, rotate_limit=15, p=0.5)
-])
+],seed=42)
 
 # 부족한 클래스 이미지 증강
 for label, count in file_counts.items():
